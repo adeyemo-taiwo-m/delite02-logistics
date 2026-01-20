@@ -33,7 +33,8 @@ const Contact = () => {
                     Our Location
                   </h4>
                   <p className="text-gray-600">
-                    123 Logistics Way, Port City, Global Trade Zone
+                    Office No, 4 Millennium Complex, Owode Academy, Olomi Road,
+                    Ibadan
                   </p>
                 </div>
               </div>
@@ -45,7 +46,7 @@ const Contact = () => {
                   <h4 className="font-bold text-lg text-primary mb-1">
                     Email Us
                   </h4>
-                  <p className="text-gray-600">contact@delitelogistics.com</p>
+                  <p className="text-gray-600">deliteo2logistics@gmail.com</p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
@@ -56,7 +57,7 @@ const Contact = () => {
                   <h4 className="font-bold text-lg text-primary mb-1">
                     Call Us
                   </h4>
-                  <p className="text-gray-600">+1 (555) 123-4567</p>
+                  <p className="text-gray-600">+234 818 261 1435</p>
                 </div>
               </div>
             </div>

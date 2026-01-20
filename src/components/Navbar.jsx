@@ -39,7 +39,14 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-6 flex justify-between items-center">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
+        <Link
+          href="/"
+          className={`flex items-center gap-2 bg-white px-6 transition-all duration-300 shadow-xl ${
+            isScrolled
+              ? "-mt-4 pt-4 pb-4 rounded-b-2xl"
+              : "-mt-6 pt-8 pb-6 rounded-b-3xl"
+          }`}
+        >
           <Image
             src="/logo.png"
             alt="Delite Logistics Logo"

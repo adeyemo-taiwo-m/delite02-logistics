@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { FaFacebookF, FaWhatsapp, FaInstagram, FaTiktok } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -20,6 +21,40 @@ const Footer = () => {
               Providing top-tier global logistics solutions with speed,
               reliability, and precision. Your cargo, our priority.
             </p>
+            <div className="flex gap-4 mt-6">
+              <a
+                href="https://www.facebook.com/delite02_logistics"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white/10 hover:bg-secondary p-2.5 rounded-full transition-all text-white hover:scale-110"
+              >
+                <FaFacebookF className="w-5 h-5" />
+              </a>
+              <a
+                href="https://wa.me/2348182611435"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white/10 hover:bg-secondary p-2.5 rounded-full transition-all text-white hover:scale-110"
+              >
+                <FaWhatsapp className="w-5 h-5" />
+              </a>
+              <a
+                href="https://www.instagram.com/delite02_logistics"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white/10 hover:bg-secondary p-2.5 rounded-full transition-all text-white hover:scale-110"
+              >
+                <FaInstagram className="w-5 h-5" />
+              </a>
+              <a
+                href="https://www.tiktok.com/@delite02_logistics"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white/10 hover:bg-secondary p-2.5 rounded-full transition-all text-white hover:scale-110"
+              >
+                <FaTiktok className="w-5 h-5" />
+              </a>
+            </div>
           </div>
 
           <div>
