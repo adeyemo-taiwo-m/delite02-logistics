@@ -118,7 +118,7 @@ export default function TrackOrder() {
     return (
       <div className="min-h-screen flex flex-col bg-gray-50">
         <Navbar />
-        <div className="flex-grow flex items-center justify-center">
+        <div className="flex-grow pt-32 flex items-center justify-center">
           <div className="flex flex-col items-center gap-4">
             <div className="w-16 h-16 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
             <p className="text-gray-500 font-medium animate-pulse">
@@ -133,9 +133,9 @@ export default function TrackOrder() {
 
   if (error) {
     return (
-      <div className="min-h-screen flex flex-col bg-gray-50">
+      <div className="min-h-screen  flex flex-col bg-gray-50">
         <Navbar />
-        <div className="flex-grow flex items-center justify-center p-4">
+        <div className="flex-grow pt-32 flex items-center justify-center p-4">
           <div className="bg-white max-w-md w-full p-8 rounded-2xl shadow-xl text-center">
             <div className="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-6">
               <svg
@@ -182,7 +182,7 @@ export default function TrackOrder() {
 
       <Navbar />
 
-      <main className="flex-grow container mx-auto px-4 py-10 max-w-5xl">
+      <main className="flex-grow container mx-auto px-4 pt-32 pb-10 max-w-5xl">
         <Link
           href="/"
           className="mb-6 flex items-center text-sm text-gray-500 hover:text-primary transition-colors"

@@ -3,18 +3,21 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ChevronDown, X } from "lucide-react";
+import { ArrowRight, ChevronDown, X, Loader2 } from "lucide-react";
 
 const Hero = () => {
   const [isTrackingModalOpen, setIsTrackingModalOpen] = useState(false);
   const [trackingNumber, setTrackingNumber] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
 
-  const handleTrackOrder = (e) => {
+  const handleTrackOrder = async (e) => {
     e.preventDefault();
     if (trackingNumber.trim()) {
-      router.push(`/track/${trackingNumber.trim()}`);
+      setIsLoading(true);
+      await router.push(`/track/${trackingNumber.trim()}`);
+      setIsLoading(false);
     }
   };
 
@@ -138,9 +141,17 @@ const Hero = () => {
                   </div>
                   <button
                     type="submit"
-                    className="w-full bg-secondary hover:bg-secondary/90 text-white font-bold py-3 px-4 rounded-lg shadow-lg hover:shadow-secondary/20 transition-all"
+                    disabled={isLoading}
+                    className="w-full bg-secondary hover:bg-secondary/90 text-white font-bold py-3 px-4 rounded-lg shadow-lg hover:shadow-secondary/20 transition-all disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                   >
-                    Track Shipment
+                    {isLoading ? (
+                      <>
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                        <span>Tracking...</span>
+                      </>
+                    ) : (
+                      "Track Shipment"
+                    )}
                   </button>
                 </form>
               </div>
