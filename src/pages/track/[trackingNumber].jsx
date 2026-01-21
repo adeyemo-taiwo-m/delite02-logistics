@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { supabase } from "@/lib/supabaseClient";
@@ -94,7 +95,7 @@ export default function TrackOrder() {
     if (s.includes("delivered"))
       return "bg-green-100 text-green-700 border-green-200";
     if (s.includes("transit") || s.includes("shipped") || s.includes("way"))
-      return "bg-blue-100 text-blue-700 border-blue-200";
+      return "bg-primary/10 text-primary border-primary/20";
     if (s.includes("pending") || s.includes("processing"))
       return "bg-yellow-100 text-yellow-700 border-yellow-200";
     if (s.includes("exception") || s.includes("hold") || s.includes("fail"))
@@ -113,232 +114,249 @@ export default function TrackOrder() {
     return <Package className="w-5 h-5" />;
   };
 
-  return (
-    <>
-      <Head>
-        <title>{`Tracking ${trackingNumber ? `#${trackingNumber}` : ""} - Delite Logistics`}</title>
-      </Head>
-
-      <div className="flex flex-col min-h-screen bg-gray-50">
+  if (loading) {
+    return (
+      <div className="min-h-screen flex flex-col bg-gray-50">
         <Navbar />
-
-        <div className="flex-grow py-12 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto">
-            {/* Back Link */}
-            <button
-              onClick={() => router.back()}
-              className="mb-6 flex items-center text-sm text-gray-500 hover:text-blue-600 transition-colors"
-            >
-              <ArrowLeft className="w-4 h-4 mr-1" />
-              Back
-            </button>
-
-            {/* Header */}
-            <div className="mb-8">
-              <h1 className="text-3xl font-bold text-gray-900">
-                Track Your Shipment
-              </h1>
-              <p className="mt-2 text-gray-600">
-                Real-time status updates for your delivery.
-              </p>
-            </div>
-
-            {loading ? (
-              <div className="flex flex-col items-center justify-center py-20 bg-white rounded-xl shadow-sm border border-gray-100">
-                <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-primary border-blue-600"></div>
-                <p className="mt-4 text-gray-500">
-                  Retrieving shipment details...
-                </p>
-              </div>
-            ) : error ? (
-              <div className="bg-white rounded-xl shadow-sm border border-red-100 p-8 text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-50 mb-4">
-                  <AlertCircle className="w-8 h-8 text-red-500" />
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                  Unavailable
-                </h3>
-                <p className="text-gray-600 mb-6 max-w-md mx-auto">{error}</p>
-                <button
-                  onClick={() => router.push("/")}
-                  className="inline-flex items-center px-6 py-2.5 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 transition"
-                >
-                  Back to Home
-                </button>
-              </div>
-            ) : (
-              <div className="space-y-6">
-                {/* Summary Card */}
-                {shipment && (
-                  <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-                    <div className="p-6">
-                      <div className="flex flex-wrap justify-between items-start gap-4 mb-6">
-                        <div>
-                          <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">
-                            Tracking Number
-                          </p>
-                          <h2 className="text-2xl font-bold text-gray-900 break-all">
-                            {shipment.tracking_number}
-                          </h2>
-                        </div>
-                        <div
-                          className={`px-3 py-1 rounded-full border flex items-center gap-2 text-sm font-medium ${getStatusColor(shipment.current_status)}`}
-                        >
-                          {getStatusIcon(shipment.current_status)}
-                          <span>{shipment.current_status}</span>
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12 border-t border-gray-100 pt-6">
-                        <div className="space-y-1 relative">
-                          <div className="absolute left-2.5 top-2.5 bottom-0 w-0.5 bg-gray-100 h-[calc(100%-20px)]"></div>
-
-                          <div className="flex items-start gap-4 relative z-10">
-                            <div className="mt-1 w-5 h-5 rounded-full bg-gray-100 flex items-center justify-center border border-gray-200">
-                              <div className="w-2 h-2 rounded-full bg-gray-400"></div>
-                            </div>
-                            <div>
-                              <p className="text-sm text-gray-500 mb-0.5">
-                                Origin
-                              </p>
-                              <p className="font-semibold text-gray-900">
-                                {shipment.origin}
-                              </p>
-                              <p className="text-sm text-gray-600">
-                                {shipment.sender_name}
-                              </p>
-                            </div>
-                          </div>
-
-                          <div className="flex items-start gap-4 relative z-10 pt-4">
-                            <div className="mt-1 w-5 h-5 rounded-full bg-blue-50 flex items-center justify-center border border-blue-200">
-                              <MapPin className="w-3 h-3 text-blue-600" />
-                            </div>
-                            <div>
-                              <p className="text-sm text-gray-500 mb-0.5">
-                                Destination
-                              </p>
-                              <p className="font-semibold text-gray-900">
-                                {shipment.destination}
-                              </p>
-                              <p className="text-sm text-gray-600">
-                                {shipment.receiver_name}
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="bg-gray-50 p-4 rounded-lg self-start">
-                          <div className="space-y-3">
-                            <div className="flex justify-between text-sm">
-                              <span className="text-gray-500">
-                                Shipped Date
-                              </span>
-                              <span className="font-medium text-gray-900">
-                                {shipment.created_at
-                                  ? format(
-                                      new Date(shipment.created_at),
-                                      "MMM d, yyyy",
-                                    )
-                                  : "N/A"}
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* Timeline */}
-                <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 sm:p-8">
-                  <h3 className="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
-                    <Clock className="w-5 h-5 text-gray-400" />
-                    Tracking History
-                  </h3>
-
-                  {events.length === 0 ? (
-                    <div className="text-center py-6 text-gray-500 bg-gray-50 rounded-lg">
-                      No detailed tracking updates available yet.
-                    </div>
-                  ) : (
-                    <div className="space-y-8">
-                      {/* Using flex-col-reverse relative to data simply by iterating backwards or just CSS if we wanted latest first top, 
-                                        but typically vertical timelines go Top (latest) to Bottom (oldest) or Top (start) to Bottom (end).
-                                        User said "Sort tracking events by created_at ascending" (oldest top, latest bottom).
-                                        Wait, logically, timelines usually show latest at the TOP. 
-                                        However, the user requirement is "Latest event visually emphasized".
-                                        Usually you read a story from top to bottom. Order start -> end.
-                                        So ascending (oldest first) makes sense for "Journey". 
-                                        I will stick to user request: "Sort tracking events by created_at ascending".
-                                    */}
-                      <div className="relative border-l-2 border-gray-200 ml-3 space-y-8 pb-2">
-                        {events.map((event, index) => {
-                          const isLatest = index === events.length - 1;
-                          return (
-                            <div
-                              key={event.id}
-                              className="relative pl-8 fade-in"
-                            >
-                              {/* Dot */}
-                              <div
-                                className={`absolute -left-[9px] top-1.5 h-[18px] w-[18px] rounded-full border-2 bg-white flex items-center justify-center
-                                                        ${isLatest ? "border-blue-600 ring-4 ring-blue-50 z-10" : "border-gray-300"}`}
-                              >
-                                {isLatest && (
-                                  <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-                                )}
-                              </div>
-
-                              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
-                                <div>
-                                  <p
-                                    className={`font-semibold ${isLatest ? "text-gray-900 text-lg" : "text-gray-700"}`}
-                                  >
-                                    {event.status}
-                                  </p>
-                                  <p className="text-gray-600">
-                                    {event.location}
-                                  </p>
-                                  {event.note && (
-                                    <p className="text-sm text-gray-500 mt-2 p-2 bg-yellow-50 text-yellow-800 border-yellow-100 border rounded inline-block max-w-xs">
-                                      Note: {event.note}
-                                    </p>
-                                  )}
-                                </div>
-                                <div className="text-sm text-gray-400 whitespace-nowrap text-right">
-                                  <div className="flex items-center justify-end gap-1.5">
-                                    <Calendar className="w-3.5 h-3.5" />
-                                    {event.created_at &&
-                                      format(
-                                        new Date(event.created_at),
-                                        "MMM d",
-                                      )}
-                                  </div>
-                                  <div className="flex items-center justify-end gap-1.5 mt-1">
-                                    <Clock className="w-3.5 h-3.5" />
-                                    {event.created_at &&
-                                      format(
-                                        new Date(event.created_at),
-                                        "h:mm a",
-                                      )}
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-            )}
+        <div className="flex-grow flex items-center justify-center">
+          <div className="flex flex-col items-center gap-4">
+            <div className="w-16 h-16 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
+            <p className="text-gray-500 font-medium animate-pulse">
+              Locating your shipment...
+            </p>
           </div>
         </div>
-
         <Footer />
       </div>
-    </>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen flex flex-col bg-gray-50">
+        <Navbar />
+        <div className="flex-grow flex items-center justify-center p-4">
+          <div className="bg-white max-w-md w-full p-8 rounded-2xl shadow-xl text-center">
+            <div className="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg
+                className="w-10 h-10 text-red-500"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                ></path>
+              </svg>
+            </div>
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">
+              Shipment Not Found
+            </h2>
+            <p className="text-gray-500 mb-8">
+              {error === "Tracking number not found"
+                ? `We couldn't find any shipment with tracking number "${trackingNumber}". Please check the number and try again.`
+                : "An error occurred while fetching tracking details. Please try again later."}
+            </p>
+            <Link
+              href="/"
+              className="inline-flex items-center px-6 py-3 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-primary hover:bg-primary/90 transition transform hover:-translate-y-0.5"
+            >
+              <ArrowLeft className="w-5 h-5 mr-2" />
+              Return to Home
+            </Link>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
+      <Head>
+        <title>Track Shipment | Delite Logistics</title>
+      </Head>
+
+      <Navbar />
+
+      <main className="flex-grow container mx-auto px-4 py-10 max-w-5xl">
+        <Link
+          href="/"
+          className="mb-6 flex items-center text-sm text-gray-500 hover:text-primary transition-colors"
+        >
+          <ArrowLeft className="w-4 h-4 mr-1" />
+          Back to Home
+        </Link>
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+          {/* Header */}
+          <div className="bg-primary p-6 md:p-10 text-white relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/4 blur-3xl"></div>
+            <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/4 blur-2xl"></div>
+
+            <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+              <div>
+                <p className="text-primary-foreground/80 text-sm font-medium mb-1">
+                  Tracking Number
+                </p>
+                <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-white">
+                  {shipment.tracking_number}
+                </h1>
+              </div>
+              <div className="px-4 py-2 bg-white/10 backdrop-blur-md rounded-lg border border-white/20">
+                <p className="text-primary-foreground/80 lowercase uppercase tracking-wider font-semibold opacity-80 text-xs">
+                  Current Status
+                </p>
+                <p className="text-lg font-bold text-white">
+                  {shipment.current_status}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3">
+            {/* Shipment Info - Sidebar on desktop */}
+            <div className="p-6 md:p-8 bg-gray-50/50 border-b lg:border-b-0 lg:border-r border-gray-100">
+              <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-6 flex items-center gap-2">
+                <Package className="w-4 h-4 text-primary" />
+                Shipment Details
+              </h3>
+
+              <div className="space-y-6">
+                <div className="relative pl-6 border-l-2 border-gray-200 pb-6 last:pb-0 last:border-0">
+                  <div className="absolute -left-[5px] top-0 w-2.5 h-2.5 rounded-full bg-gray-300"></div>
+                  <p className="text-xs text-gray-500 uppercase font-semibold mb-1">
+                    Origin
+                  </p>
+                  <p className="text-gray-900 font-medium text-lg leading-tight">
+                    {shipment.origin}
+                  </p>
+                  <p className="text-sm text-gray-500 mt-1">
+                    Sender: {shipment.sender_name}
+                  </p>
+                </div>
+
+                <div className="relative pl-6 border-l-2 border-gray-200">
+                  <div className="absolute -left-[5px] top-0 w-2.5 h-2.5 rounded-full bg-primary ring-4 ring-primary/10"></div>
+                  <p className="text-xs text-gray-500 uppercase font-semibold mb-1">
+                    Destination
+                  </p>
+                  <p className="text-gray-900 font-medium text-lg leading-tight">
+                    {shipment.destination}
+                  </p>
+                  <p className="text-sm text-gray-500 mt-1">
+                    Receiver: {shipment.receiver_name}
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-8 pt-6 border-t border-gray-200">
+                <div className="flex items-center gap-3 p-4 bg-white rounded-xl border border-gray-100 shadow-sm">
+                  <div className="w-10 h-10 rounded-full bg-primary/5 flex items-center justify-center">
+                    <Truck className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-500 font-medium">Service</p>
+                    <p className="text-sm font-bold text-gray-900">
+                      Standard Delivery
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Timeline */}
+            <div className="lg:col-span-2 p-6 md:p-8">
+              <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-8 flex items-center gap-2">
+                <Clock className="w-4 h-4 text-primary" />
+                Tracking History
+              </h3>
+
+              <div className="relative space-y-8 pl-2 md:pl-4">
+                {events.length === 0 ? (
+                  <p className="text-gray-500 italic">
+                    No tracking events available yet.
+                  </p>
+                ) : (
+                  events.map((event, index) => {
+                    const isLatest = index === events.length - 1;
+                    return (
+                      <div key={event.id} className="relative flex gap-6 group">
+                        {/* Line */}
+                        {index !== 0 && (
+                          <div
+                            className="absolute left-[11px] -top-8 w-0.5 h-8 bg-gray-200 group-hover:bg-primary/30 transition-colors"
+                            aria-hidden="true"
+                          ></div>
+                        )}
+
+                        {/* Dot */}
+                        <div className="relative flex-none">
+                          <div
+                            className={`w-6 h-6 rounded-full border-2 flex items-center justify-center bg-white 
+                                                        ${isLatest ? "border-primary ring-4 ring-primary/10 z-10" : "border-gray-300"}`}
+                          >
+                            {isLatest && (
+                              <div className="w-2 h-2 bg-primary rounded-full"></div>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Content */}
+                        <div
+                          className={`flex-grow pb-8 ${index !== 0 ? "border-b border-gray-100" : ""}`}
+                        >
+                          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1 mb-2">
+                            <h4
+                              className={`text-base font-bold ${isLatest ? "text-primary" : "text-gray-900"}`}
+                            >
+                              {event.status}
+                            </h4>
+                            <span className="text-sm text-gray-500 font-medium whitespace-nowrap">
+                              {/* Format date: Jan 24, 2024, 10:30 AM */}
+                              {new Date(event.created_at).toLocaleDateString(
+                                "en-US",
+                                {
+                                  month: "short",
+                                  day: "numeric",
+                                  year: "numeric",
+                                },
+                              )}
+                              <span className="mx-2 text-gray-300">|</span>
+                              {new Date(event.created_at).toLocaleTimeString(
+                                "en-US",
+                                {
+                                  hour: "numeric",
+                                  minute: "numeric",
+                                },
+                              )}
+                            </span>
+                          </div>
+                          <div className="flex items-start gap-2 text-gray-600 mb-2">
+                            <div className="mt-1 w-5 h-5 rounded-full bg-gray-50 flex items-center justify-center border border-gray-100">
+                              <MapPin className="w-3 h-3 text-gray-400" />
+                            </div>
+                            <span className="text-sm">{event.location}</span>
+                          </div>
+                          {event.note && (
+                            <p className="text-sm text-gray-500 bg-gray-50 p-3 rounded-lg border border-gray-100 inline-block mt-1">
+                              {event.note}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <Footer />
+    </div>
   );
 }

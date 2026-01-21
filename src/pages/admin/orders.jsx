@@ -349,15 +349,15 @@ export default function AdminShipment() {
 
               <form onSubmit={handleCreateOrder} className="p-6 space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="md:col-span-2 bg-blue-50 p-4 rounded-lg border border-blue-100">
-                    <label className="block text-sm font-medium text-blue-900 mb-1">
+                  <div className="md:col-span-2 bg-primary/5 p-4 rounded-lg border border-primary/10">
+                    <label className="block text-sm font-medium text-primary mb-1">
                       Tracking Number (Auto-generated if empty)
                     </label>
                     <div className="flex gap-2">
                       <input
                         type="text"
                         placeholder="e.g. TRK-..."
-                        className="flex-grow p-2 border border-blue-200 rounded focus:ring-2 focus:ring-secondary focus:border-transparent outline-none bg-white"
+                        className="flex-grow p-2 border border-primary/20 rounded focus:ring-2 focus:ring-secondary focus:border-transparent outline-none bg-white"
                         value={newOrder.tracking_number}
                         onChange={(e) =>
                           setNewOrder({
@@ -388,7 +388,7 @@ export default function AdminShipment() {
                     <input
                       required
                       type="text"
-                      className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none"
+                      className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-secondary outline-none"
                       value={newOrder.sender_name}
                       onChange={(e) =>
                         setNewOrder({
@@ -405,7 +405,7 @@ export default function AdminShipment() {
                     <input
                       required
                       type="text"
-                      className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none"
+                      className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-secondary outline-none"
                       value={newOrder.receiver_name}
                       onChange={(e) =>
                         setNewOrder({
@@ -423,7 +423,7 @@ export default function AdminShipment() {
                     <input
                       required
                       type="text"
-                      className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none"
+                      className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-secondary outline-none"
                       value={newOrder.origin}
                       onChange={(e) =>
                         setNewOrder({ ...newOrder, origin: e.target.value })
@@ -437,7 +437,7 @@ export default function AdminShipment() {
                     <input
                       required
                       type="text"
-                      className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none"
+                      className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-secondary outline-none"
                       value={newOrder.destination}
                       onChange={(e) =>
                         setNewOrder({
@@ -497,7 +497,7 @@ export default function AdminShipment() {
                       </label>
                       <input
                         type="text"
-                        className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none"
+                        className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-secondary outline-none"
                         value={editShipment.sender_name}
                         onChange={(e) =>
                           setEditShipment({
@@ -513,7 +513,7 @@ export default function AdminShipment() {
                       </label>
                       <input
                         type="text"
-                        className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none"
+                        className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-secondary outline-none"
                         value={editShipment.receiver_name}
                         onChange={(e) =>
                           setEditShipment({
@@ -529,7 +529,7 @@ export default function AdminShipment() {
                       </label>
                       <input
                         type="text"
-                        className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none"
+                        className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-secondary outline-none"
                         value={editShipment.origin}
                         onChange={(e) =>
                           setEditShipment({
@@ -545,7 +545,7 @@ export default function AdminShipment() {
                       </label>
                       <input
                         type="text"
-                        className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none"
+                        className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-secondary outline-none"
                         value={editShipment.destination}
                         onChange={(e) =>
                           setEditShipment({
@@ -561,7 +561,7 @@ export default function AdminShipment() {
                       </label>
                       <input
                         type="text"
-                        className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none"
+                        className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-secondary outline-none"
                         value={editShipment.current_status}
                         onChange={(e) =>
                           setEditShipment({
@@ -606,7 +606,7 @@ export default function AdminShipment() {
                       New Status
                     </label>
                     <select
-                      className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none"
+                      className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-secondary outline-none"
                       value={newEvent.status}
                       onChange={(e) =>
                         setNewEvent({ ...newEvent, status: e.target.value })
@@ -632,7 +632,7 @@ export default function AdminShipment() {
                     <input
                       type="text"
                       placeholder="e.g. London, UK"
-                      className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none"
+                      className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-secondary outline-none"
                       value={newEvent.location}
                       onChange={(e) =>
                         setNewEvent({ ...newEvent, location: e.target.value })
@@ -646,7 +646,7 @@ export default function AdminShipment() {
                     </label>
                     <textarea
                       rows="2"
-                      className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none"
+                      className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-secondary outline-none"
                       value={newEvent.note}
                       onChange={(e) =>
                         setNewEvent({ ...newEvent, note: e.target.value })

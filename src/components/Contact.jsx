@@ -73,7 +73,7 @@ const Contact = () => {
           >
             <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
               <div className="flex items-start gap-4 mb-6">
-                <div className="bg-orange-50 p-3 rounded-full text-secondary">
+                <div className="bg-secondary/5 p-3 rounded-full text-secondary">
                   <MapPin className="w-6 h-6" />
                 </div>
                 <div>
@@ -87,7 +87,7 @@ const Contact = () => {
                 </div>
               </div>
               <div className="flex items-start gap-4 mb-6">
-                <div className="bg-orange-50 p-3 rounded-full text-secondary">
+                <div className="bg-secondary/5 p-3 rounded-full text-secondary">
                   <Mail className="w-6 h-6" />
                 </div>
                 <div>
@@ -98,7 +98,7 @@ const Contact = () => {
                 </div>
               </div>
               <div className="flex items-start gap-4 mb-6">
-                <div className="bg-orange-50 p-3 rounded-full text-secondary">
+                <div className="bg-secondary/5 p-3 rounded-full text-secondary">
                   <Phone className="w-6 h-6" />
                 </div>
                 <div>
@@ -109,7 +109,7 @@ const Contact = () => {
                 </div>
               </div>
               <div className="flex items-start gap-4">
-                <div className="bg-orange-50 p-3 rounded-full text-secondary">
+                <div className="bg-secondary/5 p-3 rounded-full text-secondary">
                   <FaWhatsapp className="w-6 h-6" />
                 </div>
                 <div>
@@ -141,7 +141,7 @@ const Contact = () => {
                   <input
                     {...register("name", { required: true })}
                     type="text"
-                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-orange-100 outline-none transition-all"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-secondary/10 outline-none transition-all"
                     placeholder="Your Name"
                   />
                 </div>
@@ -152,7 +152,7 @@ const Contact = () => {
                   <input
                     {...register("email", { required: true })}
                     type="email"
-                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-orange-100 outline-none transition-all"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-secondary/10 outline-none transition-all"
                     placeholder="your@email.com"
                   />
                 </div>
@@ -164,7 +164,7 @@ const Contact = () => {
                 <input
                   {...register("subject", { required: true })}
                   type="text"
-                  className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-orange-100 outline-none transition-all"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-secondary/10 outline-none transition-all"
                   placeholder="Inquiry about..."
                 />
               </div>
@@ -175,7 +175,7 @@ const Contact = () => {
                 <textarea
                   {...register("message", { required: true })}
                   rows="5"
-                  className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-orange-100 outline-none transition-all resize-none"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-secondary/10 outline-none transition-all resize-none"
                   placeholder="Details about your delivery..."
                 ></textarea>
               </div>
@@ -194,7 +194,7 @@ const Contact = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-secondary hover:bg-orange-600 text-white font-bold py-4 rounded-lg shadow-lg hover:shadow-orange-500/20 transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                className="w-full bg-secondary hover:bg-secondary/90 text-white font-bold py-4 rounded-lg shadow-lg hover:shadow-secondary/20 transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (
                   <>

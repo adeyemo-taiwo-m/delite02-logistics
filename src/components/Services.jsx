@@ -79,7 +79,7 @@ const Services = () => {
               transition={{ delay: index * 0.1 }}
               className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100 group"
             >
-              <div className="mb-6 bg-orange-50 w-20 h-20 rounded-full flex items-center justify-center group-hover:bg-orange-100 transition-colors">
+              <div className="mb-6 bg-secondary/5 w-20 h-20 rounded-full flex items-center justify-center group-hover:bg-secondary/10 transition-colors">
                 {service.icon}
               </div>
               <h3 className="text-xl font-bold text-primary mb-3">
