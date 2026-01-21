@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ChevronDown, X } from "lucide-react";
@@ -8,10 +9,13 @@ const Hero = () => {
   const [isTrackingModalOpen, setIsTrackingModalOpen] = useState(false);
   const [trackingNumber, setTrackingNumber] = useState("");
 
+  const router = useRouter();
+
   const handleTrackOrder = (e) => {
     e.preventDefault();
-    console.log("Tracking number:", trackingNumber);
-    // Future implementation
+    if (trackingNumber.trim()) {
+      router.push(`/track/${trackingNumber.trim()}`);
+    }
   };
 
   return (
