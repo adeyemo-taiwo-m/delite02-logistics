@@ -2,6 +2,7 @@ import Head from "next/head";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
+import PartnershipPromo from "@/components/PartnershipPromo";
 import About from "@/components/About";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import Contact from "@/components/Contact";
@@ -24,6 +25,7 @@ export default function Home() {
         <Navbar />
         <Hero />
         <Services />
+        <PartnershipPromo />
         <About />
         <WhyChooseUs />
         <Contact />

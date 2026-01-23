@@ -62,7 +62,7 @@ const Footer = () => {
             <ul className="space-y-2 text-sm">
               <li>
                 <Link
-                  href="#hero"
+                  href="/#hero"
                   className="hover:text-secondary transition-colors"
                 >
                   Home
@@ -70,7 +70,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="#services"
+                  href="/#services"
                   className="hover:text-secondary transition-colors"
                 >
                   Services
@@ -78,7 +78,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="#about"
+                  href="/#about"
                   className="hover:text-secondary transition-colors"
                 >
                   About Us
@@ -86,7 +86,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="#contact"
+                  href="/#contact"
                   className="hover:text-secondary transition-colors"
                 >
                   Contact

@@ -22,11 +22,12 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: "Home", href: "#hero" },
-    { name: "Services", href: "#services" },
-    { name: "About Us", href: "#about" },
-    { name: "Why Us", href: "#why-choose-us" },
-    { name: "Contact", href: "#contact" },
+    { name: "Home", href: "/#hero" },
+    { name: "Services", href: "/#services" },
+    { name: "About Us", href: "/#about" },
+    { name: "Why Us", href: "/#why-choose-us" },
+    { name: "Partnership", href: "/partnership" },
+    { name: "Contact", href: "/#contact" },
   ];
 
   return (
@@ -60,7 +61,7 @@ const Navbar = () => {
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.name}
               href={link.href}
               className={`text-sm font-medium hover:text-secondary transition-colors ${
@@ -68,16 +69,16 @@ const Navbar = () => {
               }`}
             >
               {link.name}
-            </a>
+            </Link>
           ))}
         </div>
 
-        <a
-          href="#contact"
+        <Link
+          href="/#contact"
           className="hidden md:block bg-secondary hover:bg-secondary/90 text-white px-5 py-2.5 rounded-full font-medium text-sm transition-all shadow-lg shadow-secondary/20"
         >
           Contact us
-        </a>
+        </Link>
 
         {/* Mobile Menu Button */}
         <button
@@ -102,14 +103,14 @@ const Navbar = () => {
             className="absolute top-full left-0 w-full bg-white shadow-xl py-6 px-6 flex flex-col gap-4 md:hidden border-t border-gray-100"
           >
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.name}
                 href={link.href}
                 className="text-primary font-medium hover:text-secondary py-2 border-b border-gray-50 last:border-0"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {link.name}
-              </a>
+              </Link>
             ))}
             <a
               href="#contact"
